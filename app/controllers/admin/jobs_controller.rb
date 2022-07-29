@@ -13,7 +13,10 @@ class Admin::JobsController < ApplicationController
     def create
     end
 
-    def update
+    def edit
     end
 
+    def update
+    end
+    
 end

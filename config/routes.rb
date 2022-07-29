@@ -9,12 +9,12 @@ Rails.application.routes.draw do
 
   namespace :requestor do
     resources :dashboard, only: %i[index]
-    resources :jobs, only: %i[index show new create update]
+    resources :jobs, only: %i[index show new create edit update]
   end
 
   namespace :admin do
     resources :dashboard, only: %i[index]
-    resources :jobs, only: %i[index show edit update]
+    resources :jobs, only: %i[index show edit edit update]
   end
 
 
