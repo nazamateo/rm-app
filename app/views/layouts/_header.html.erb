@@ -11,6 +11,7 @@
   <% end %>
   <% if user_signed_in? %>
     <% if current_user.requestor? %>
+      <%= link_to 'New Job Order', new_requestor_job_path %>
     <% else%>
     <%end%>
     <%= link_to 'Sign out', destroy_user_session_path, :method => :delete  %>

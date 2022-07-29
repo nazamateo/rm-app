@@ -1,0 +1,27 @@
+<% if @job.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job order from being saved:</h2>
+    <ul>
+      <% @job.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div>
+  <div>
+    <%= form_with model: @job, url: requestor_jobs_path(@job) do |form| %>
+      <p>
+        <%= form.label :nature_of_request %><br>
+        <%= form.text_field :nature_of_request %>
+      </p>
+      <p>
+        <%= form.label :note_to_staff %><br>
+        <%= form.text_field :note_to_staff %>
+      </p>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
+  </div>
+</div>

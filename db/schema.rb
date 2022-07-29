@@ -16,8 +16,9 @@ ActiveRecord::Schema.define(version: 2022_07_27_124124) do
   enable_extension "plpgsql"
 
   create_table "jobs", force: :cascade do |t|
-    t.bigint "requestor_id", null: false
-    t.text "description"
+    t.bigint "user_id", null: false
+    t.text "nature_of_request"
+    t.text "note_to_staff"
     t.bigint "assessor_id", null: false
     t.bigint "staff_id", null: false
     t.string "maintenance_unit"
@@ -26,8 +27,8 @@ ActiveRecord::Schema.define(version: 2022_07_27_124124) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["assessor_id"], name: "index_jobs_on_assessor_id"
-    t.index ["requestor_id"], name: "index_jobs_on_requestor_id"
     t.index ["staff_id"], name: "index_jobs_on_staff_id"
+    t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
   create_table "personnels", force: :cascade do |t|
@@ -59,5 +60,4 @@ ActiveRecord::Schema.define(version: 2022_07_27_124124) do
 
   add_foreign_key "jobs", "personnels", column: "assessor_id"
   add_foreign_key "jobs", "personnels", column: "staff_id"
-  add_foreign_key "jobs", "users", column: "requestor_id"
 end
