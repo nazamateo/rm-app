@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :requestor do
     resources :dashboard, only: %i[index]
     resources :jobs, only: %i[index show new create edit update]
+    resources :evaluation, only: %i[new create]
   end
 
   namespace :admin do
