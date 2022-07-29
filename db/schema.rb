@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 2022_07_27_124124) do
     t.bigint "user_id", null: false
     t.text "nature_of_request"
     t.text "note_to_staff"
-    t.bigint "assessor_id", null: false
-    t.bigint "staff_id", null: false
+    t.bigint "assessor_id"
+    t.bigint "staff_id"
     t.string "maintenance_unit"
-    t.string "status"
+    t.string "status", default: "Queue"
     t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

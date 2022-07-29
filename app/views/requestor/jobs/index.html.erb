@@ -1,0 +1,81 @@
+<div class="overflow-x-auto relative">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="py-3 px-6">
+          Job Order Number
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Nature of request
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Note to engineering
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Assessed By
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Maintenance Unit
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Assigned to
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Status
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Remarks
+        </th>
+        <th scope="col" class="py-3 px-6">
+          View
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Acknowledge
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @jobs.each do |job| %>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%=job.id%>
+          </th>
+          <td class="py-4 px-6">
+            <%=job.nature_of_request%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.note_to_staff%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.assessor%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.maintenance_unit%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.staff%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.status%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.remarks%>
+          </td>
+          <td class="py-4 px-6">
+            <%= link_to requestor_job_path(job) do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            <%end%>
+          </td>
+          <td class="py-4 px-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
