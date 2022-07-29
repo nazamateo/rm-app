@@ -1,0 +1,2 @@
+module Requestor::JobsHelper
+end
