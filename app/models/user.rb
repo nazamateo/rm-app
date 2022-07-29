@@ -11,4 +11,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   has_many :jobs, dependent: :destroy
+
+  def authenticate(scope = nil, block = nil)
+    constraints_for(:authenticate!, scope, block) do
+      yield
+    end
+  end
+  
 end
