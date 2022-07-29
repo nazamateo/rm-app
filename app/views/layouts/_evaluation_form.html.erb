@@ -1,0 +1,61 @@
+<% if @evaluation.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this job order evaluation from being saved:</h2>
+    <ul>
+      <% @evaluation.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div>
+  <div>
+    <%= form_with model: @evaluation, url: requestor_job_evaluation_index_path(@job, @evaluation) do |form| %>
+      <p>
+        <%= form.label :response_time %><br>
+        <%= form.radio_button :response_time, "poor" %>
+        <%= form.label :response_time_poor, 1 %>
+        <%= form.radio_button :response_time, "moderately_satisfactory" %>
+        <%= form.label :response_time_moderately_satisfactory, 2 %>
+        <%= form.radio_button :response_time, "satisfactory" %>
+        <%= form.label :response_time_satisfactory, 3 %>
+        <%= form.radio_button :response_time, "highly_satisfactory" %>
+        <%= form.label :response_time_highly_satisfactory, 4 %>
+        <%= form.radio_button :response_time, "outstanding" %>
+        <%= form.label :response_time_outstanding, 5 %>
+      </p>
+      <p>
+        <%= form.label :quality %><br>
+        <%= form.radio_button :quality, "poor" %>
+        <%= form.label :quality_poor, 1 %>
+        <%= form.radio_button :quality, "moderately_satisfactory" %>
+        <%= form.label :quality_moderately_satisfactory, 2 %>
+        <%= form.radio_button :quality, "satisfactory" %>
+        <%= form.label :quality_satisfactory, 3 %>
+        <%= form.radio_button :quality, "highly_satisfactory" %>
+        <%= form.label :quality_highly_satisfactory, 4 %>
+        <%= form.radio_button :quality, "outstanding" %>
+        <%= form.label :quality_outstanding, 5 %>
+      </p>
+      <p>
+        <%= form.label :courtesy %><br>
+        <%= form.radio_button :courtesy, "poor" %>
+        <%= form.label :courtesy_poor, 1 %>
+        <%= form.radio_button :courtesy, "moderately_satisfactory" %>
+        <%= form.label :courtesy_moderately_satisfactory, 2 %>
+        <%= form.radio_button :courtesy, "satisfactory" %>
+        <%= form.label :courtesy_satisfactory, 3 %>
+        <%= form.radio_button :courtesy, "highly_satisfactory" %>
+        <%= form.label :courtesy_highly_satisfactory, 4 %>
+        <%= form.radio_button :courtesy, "outstanding" %>
+        <%= form.label :courtesy_outstanding, 5 %>
+      </p>
+      <p>
+        <%= form.text_area :comments, size: "70x5" %>
+      </p>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
+  </div>
+</div>
