@@ -10,6 +10,9 @@
     </div>
   <% end %>
   <% if user_signed_in? %>
+    <% if current_user.requestor? %>
+    <% else%>
+    <%end%>
     <%= link_to 'Sign out', destroy_user_session_path, :method => :delete  %>
   <%end%>
 </nav>
