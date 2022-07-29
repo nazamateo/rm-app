@@ -26,12 +26,6 @@ class Requestor::JobsController < ApplicationController
         end
     end
 
-    def edit
-    end
-
-    def update
-    end
-
     private
 
     def jobs_params

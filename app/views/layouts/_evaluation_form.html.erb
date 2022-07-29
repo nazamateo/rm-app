@@ -13,41 +13,41 @@
     <%= form_with model: @evaluation, url: requestor_job_evaluation_index_path(@job, @evaluation) do |form| %>
       <p>
         <%= form.label :response_time %><br>
-        <%= form.radio_button :response_time, "poor" %>
+        <%= form.radio_button :response_time, 1 %>
         <%= form.label :response_time_poor, 1 %>
-        <%= form.radio_button :response_time, "moderately_satisfactory" %>
+        <%= form.radio_button :response_time, 2 %>
         <%= form.label :response_time_moderately_satisfactory, 2 %>
-        <%= form.radio_button :response_time, "satisfactory" %>
+        <%= form.radio_button :response_time, 3 %>
         <%= form.label :response_time_satisfactory, 3 %>
-        <%= form.radio_button :response_time, "highly_satisfactory" %>
+        <%= form.radio_button :response_time, 4 %>
         <%= form.label :response_time_highly_satisfactory, 4 %>
-        <%= form.radio_button :response_time, "outstanding" %>
+        <%= form.radio_button :response_time, 5 %>
         <%= form.label :response_time_outstanding, 5 %>
       </p>
       <p>
         <%= form.label :quality %><br>
-        <%= form.radio_button :quality, "poor" %>
+        <%= form.radio_button :quality, 1 %>
         <%= form.label :quality_poor, 1 %>
-        <%= form.radio_button :quality, "moderately_satisfactory" %>
+        <%= form.radio_button :quality, 2 %>
         <%= form.label :quality_moderately_satisfactory, 2 %>
-        <%= form.radio_button :quality, "satisfactory" %>
+        <%= form.radio_button :quality, 3 %>
         <%= form.label :quality_satisfactory, 3 %>
-        <%= form.radio_button :quality, "highly_satisfactory" %>
+        <%= form.radio_button :quality, 4 %>
         <%= form.label :quality_highly_satisfactory, 4 %>
-        <%= form.radio_button :quality, "outstanding" %>
+        <%= form.radio_button :quality, 5 %>
         <%= form.label :quality_outstanding, 5 %>
       </p>
       <p>
         <%= form.label :courtesy %><br>
-        <%= form.radio_button :courtesy, "poor" %>
+        <%= form.radio_button :courtesy, 1 %>
         <%= form.label :courtesy_poor, 1 %>
-        <%= form.radio_button :courtesy, "moderately_satisfactory" %>
+        <%= form.radio_button :courtesy, 2 %>
         <%= form.label :courtesy_moderately_satisfactory, 2 %>
-        <%= form.radio_button :courtesy, "satisfactory" %>
+        <%= form.radio_button :courtesy, 3 %>
         <%= form.label :courtesy_satisfactory, 3 %>
-        <%= form.radio_button :courtesy, "highly_satisfactory" %>
+        <%= form.radio_button :courtesy, 4 %>
         <%= form.label :courtesy_highly_satisfactory, 4 %>
-        <%= form.radio_button :courtesy, "outstanding" %>
+        <%= form.radio_button :courtesy, 5 %>
         <%= form.label :courtesy_outstanding, 5 %>
       </p>
       <p>

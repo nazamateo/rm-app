@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   namespace :requestor do
     resources :dashboard, only: %i[index]
-    resources :jobs, except: %i[delete] do
+    resources :jobs, except: %i[delete edit update] do
       resources :evaluation, only: %i[new create]
     end
   end
