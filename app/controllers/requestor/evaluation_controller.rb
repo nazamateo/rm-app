@@ -12,7 +12,7 @@ class Requestor::EvaluationController < ApplicationController
         @evaluation = @job.build_evaluation(evaluation_params)
         respond_to do |format|
             if  @evaluation.save
-                format.html { redirect_to requestor_job_path(@job), notice: "Evaluation was successfully created." }
+                format.html { redirect_to requestor_job_path(@job), notice: " Thank you for your feedback! We are glad to be of service." }
             else
                 format.html { render :new, status: :unprocessable_entity }
             end
