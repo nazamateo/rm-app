@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_29_153320) do
+ActiveRecord::Schema.define(version: 2022_07_31_052856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_07_29_153320) do
     t.integer "response_time"
     t.integer "quality"
     t.integer "courtesy"
-    t.string "comments"
+    t.text "comments"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["job_id"], name: "index_evaluations_on_job_id"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 2022_07_29_153320) do
     t.bigint "staff_id"
     t.string "maintenance_unit"
     t.string "status", default: "Queue"
-    t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["assessor_id"], name: "index_jobs_on_assessor_id"
@@ -49,6 +48,15 @@ ActiveRecord::Schema.define(version: 2022_07_29_153320) do
     t.string "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "remarks", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.text "status"
+    t.text "remarks"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_id"], name: "index_remarks_on_job_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -32,6 +32,12 @@
         <th scope="col" class="py-3 px-6">
           Remarks
         </th>
+        <th scope="col" class="py-3 px-6">
+          Created at
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Updated at
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -61,15 +67,27 @@
           <%=@job.staff%>
         </td>
         <td class="py-4 px-6">
-          <%=@job.status%>
+          if no record on remarks model
+          <%=job.status%>
+          else
+          reference remarks model status
         </td>
         <td class="py-4 px-6">
-          <%=@job.remarks%>
+          Latest remarks
+        </td>
+        <td class="ps="py-4 px-6">
+          <%=@job.created_at.strftime("%b %d, '%y")%> | 
+          <%=@job.created_at.strftime('%H:%M')%>
+        </td>
+        <td class="py-4 px-6">
+          <%=@job.updated_at.strftime("%b %d, '%y")%> | 
+          <%=@job.updated_at.strftime('%H:%M')%>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+<div>show all remarks</div>
 <% if @job.evaluation != nil%>
   <div>
     <h3>Evaluation</h3>

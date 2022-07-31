@@ -5,7 +5,7 @@ class CreateEvaluations < ActiveRecord::Migration[6.1]
       t.integer :response_time
       t.integer :quality
       t.integer :courtesy
-      t.string :comments
+      t.text :comments
       t.timestamps
     end
   end

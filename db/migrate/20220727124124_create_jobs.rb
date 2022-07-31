@@ -8,7 +8,6 @@ class CreateJobs < ActiveRecord::Migration[6.1]
       t.references :staff, index: true, foreign_key: {to_table: :personnels}
       t.string :maintenance_unit
       t.string :status, default: 'Queue'
-      t.string :remarks
       t.timestamps
     end
   end
