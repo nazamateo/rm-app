@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :dashboard, only: %i[index]
-    resources :jobs, except: %i[delete]
+    resources :jobs, only: %i[index show edit update]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

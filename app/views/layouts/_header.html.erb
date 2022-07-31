@@ -15,7 +15,9 @@
       <%= link_to 'My Job Orders', requestor_jobs_path %>
       <%= link_to 'New Job Order', new_requestor_job_path %>
     <% else%>
+      <%= link_to 'Dashboard', admin_dashboard_index_path %>
+      <%= link_to 'All Job Orders', admin_jobs_path %>
+      <%= link_to 'Sign out', destroy_user_session_path, :method => :delete  %>
     <%end%>
-    <%= link_to 'Sign out', destroy_user_session_path, :method => :delete  %>
   <%end%>
 </nav>

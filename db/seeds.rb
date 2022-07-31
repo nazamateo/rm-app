@@ -25,3 +25,13 @@ User.create!(name: 'Nazareno',
             password: 'abc123',
             password_confirmation: 'abc123',
             role: 1)
+
+            User.create!(name: 'Nazareno',
+            surname: 'Mateo',
+            position: 'Mechanical Engineer',
+            unit: 'Engineering',
+            service: 'General Services',
+            email: 'nrmateo2@dlshsi.edu.ph',
+            password: 'abc123',
+            password_confirmation: 'abc123',
+            role: 1)

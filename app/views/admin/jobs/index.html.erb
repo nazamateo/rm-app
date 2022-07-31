@@ -1,0 +1,134 @@
+<div class="overflow-x-auto relative">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="py-3 px-6">
+          Job Order Number
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Email
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Service
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Unit
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Nature of request
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Note to engineering
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Assessed by
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Maintenance Unit
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Assigned to
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Status
+        </th>
+        <th scope="col" class="py-3 px-6">
+          View
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Ack
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Created at
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Updated at
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Days queue
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Days pending
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Days ongoing
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @jobs.each do |job| %>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%=job.id%>
+          </th>
+          <td class="py-4 px-6">
+            email
+          </td>
+          <td class="py-4 px-6">
+            service
+          </td>
+          <td class="py-4 px-6">
+            unit
+          </td>
+          <td class="py-4 px-6">
+            <%=job.nature_of_request%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.note_to_staff%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.assessor_id%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.maintenance_unit%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.staff_id%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.status%>
+          </td>
+          <td class="py-4 px-6">
+            <%= link_to requestor_job_path(job) do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            <%end%>
+          </td>
+          <%if job.evaluation == nil%>
+            <td class="py-4 px-6">
+              <%if job.status == 'Done'%>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+              <%else%>
+              <%end%>
+            <%else%>
+              <td class="py-4 px-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              <%end%>
+            </td>
+            <td class="py-4 px-6">
+              <%=job.created_at.strftime("%b %d, '%y")%>
+              <%=job.created_at.strftime('at %H:%M')%>
+            </td>
+            <td class="py-4 px-6">
+              <%=job.updated_at%>
+            </td>
+            <td class="py-4 px-6">
+              days queue
+            </td>
+            <td class="py-4 px-6">
+              days pending
+            </td>
+            <td class="py-4 px-6">
+              days ongoing
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
