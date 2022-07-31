@@ -21,9 +21,6 @@
           Created at
         </th>
         <th scope="col" class="py-3 px-6">
-          Updated at
-        </th>
-        <th scope="col" class="py-3 px-6">
           View
         </th>
         <th scope="col" class="py-3 px-6">
@@ -53,12 +50,8 @@
             Latest remarks
           </td>
           <td class="py-4 px-6">
-            <%=job.created_at.strftime("%b %d, '%y")%> |
-            <%=job.created_at.strftime('%H:%M')%>
-          </td>
-          <td class="py-4 px-6">
-            <%=job.updated_at.strftime("%b %d, '%y")%> |
-            <%=job.updated_at.strftime('%H:%M')%>
+            <%=job.created_at.localtime.strftime("%b %d, '%y")%> |
+            <%=job.created_at.localtime.strftime('%H:%M')%>
           </td>
           <td class="py-4 px-6">
             <%= link_to requestor_job_path(job) do %>

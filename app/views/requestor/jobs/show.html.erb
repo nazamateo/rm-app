@@ -6,25 +6,10 @@
           Job Order Number
         </th>
         <th scope="col" class="py-3 px-6">
-          Unit
-        </th>
-        <th scope="col" class="py-3 px-6">
-          Service
-        </th>
-        <th scope="col" class="py-3 px-6">
           Nature of request
         </th>
         <th scope="col" class="py-3 px-6">
           Note to engineering
-        </th>
-        <th scope="col" class="py-3 px-6">
-          Assessed By
-        </th>
-        <th scope="col" class="py-3 px-6">
-          Maintenance Unit
-        </th>
-        <th scope="col" class="py-3 px-6">
-          Assigned to
         </th>
         <th scope="col" class="py-3 px-6">
           Status
@@ -35,9 +20,6 @@
         <th scope="col" class="py-3 px-6">
           Created at
         </th>
-        <th scope="col" class="py-3 px-6">
-          Updated at
-        </th>
       </tr>
     </thead>
     <tbody>
@@ -46,29 +28,14 @@
           <%=@job.id%>
         </th>
         <td class="py-4 px-6">
-          <%=current_user.unit%>
-        </td>
-        <td class="py-4 px-6">
-          <%=current_user.service%>
-        </td>
-        <td class="py-4 px-6">
           <%=@job.nature_of_request%>
         </td>
         <td class="py-4 px-6">
           <%=@job.note_to_staff%>
         </td>
-        <td class="py-4 px-6">
-          <%=@job.assessor%>
-        </td>
-        <td class="py-4 px-6">
-          <%=@job.maintenance_unit%>
-        </td>
-        <td class="py-4 px-6">
-          <%=@job.staff%>
-        </td>
-        <td class="py-4 px-6">
+        <td  class="py-4 px-6">
           if no record on remarks model
-          <%=job.status%>
+          <%=@job.status%>
           else
           reference remarks model status
         </td>
@@ -76,16 +43,18 @@
           Latest remarks
         </td>
         <td class="ps="py-4 px-6">
-          <%=@job.created_at.strftime("%b %d, '%y")%> | 
-          <%=@job.created_at.strftime('%H:%M')%>
-        </td>
-        <td class="py-4 px-6">
-          <%=@job.updated_at.strftime("%b %d, '%y")%> | 
-          <%=@job.updated_at.strftime('%H:%M')%>
+          <%=@job.created_at.localtime.strftime("%b %d, '%y")%> | 
+          <%=@job.created_at.localtime.strftime('%H:%M')%>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div>
+  <p>Assessed by: <%=@job.assessor%></p>
+  <p>Assigned to: <%=@job.staff%></p>
+  <p>Maintenance unit: <%=@job.maintenance_unit%></p>
+  <p>Local number: </p>
 </div>
 <div>show all remarks</div>
 <% if @job.evaluation != nil%>
