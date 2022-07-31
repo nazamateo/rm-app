@@ -9,6 +9,13 @@ class Requestor::JobsController < ApplicationController
     def show
         @current_user_jobs = current_user.jobs
         @job = @current_user_jobs.find params[:id]
+        
+        if @job.evaluation != nil
+            @response_time = convert_rating(@job.evaluation.response_time)           
+            @quality = convert_rating(@job.evaluation.quality)           
+            @courtesy = convert_rating(@job.evaluation.courtesy)
+            @comments = @job.evaluation.comments           
+        end
     end
 
     def new
@@ -32,4 +39,18 @@ class Requestor::JobsController < ApplicationController
         params.require(:job).permit(:nature_of_request, :note_to_staff)
     end
 
+    def convert_rating(rating)
+        case self
+        when 1
+            'Poor'
+        when 2
+            'Moderately Satisfactory'
+        when 3
+            'Satisfactory'
+        when 4
+            'Highly Satisfactory'
+        else 5
+            'Outstanding'
+        end
+    end
 end

@@ -70,3 +70,12 @@
     </tbody>
   </table>
 </div>
+<% if @job.evaluation != nil%>
+  <div>
+    <h3>Evaluation</h3>
+    <p>Response Time : <%=@response_time%></p>
+    <p>Quality : <%=@quality%></p>
+    <p>Courtesy : <%=@courtesy%></p>
+    <p>Message : <%=@comments%></p>
+  </div>
+<%end%>
