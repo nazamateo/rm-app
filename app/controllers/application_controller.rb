@@ -16,4 +16,5 @@ class ApplicationController < ActionController::Base
   def authenticate_requestor
     raise ActionController::RoutingError, 'Not Found' unless current_user.requestor?
   end
+
 end

@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2022_07_31_052856) do
     t.bigint "staff_id"
     t.string "maintenance_unit"
     t.string "status", default: "Queue"
+    t.datetime "closed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["assessor_id"], name: "index_jobs_on_assessor_id"

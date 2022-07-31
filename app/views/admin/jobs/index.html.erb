@@ -1,5 +1,5 @@
-<div class="overflow-x-auto relative">
-  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+<div class="overflow-x-auto flex items-center justify-center w-11/12 sm:rounded-lg">
+  <table class="block w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
         <th scope="col" class="py-3 px-6">
@@ -39,12 +39,6 @@
           Created at
         </th>
         <th scope="col" class="py-3 px-6">
-          View
-        </th>
-        <th scope="col" class="py-3 px-6">
-          Ack
-        </th>
-        <th scope="col" class="py-3 px-6">
           Days queue
         </th>
         <th scope="col" class="py-3 px-6">
@@ -52,6 +46,12 @@
         </th>
         <th scope="col" class="py-3 px-6">
           Days ongoing
+        </th>
+        <th scope="col" class="py-3 px-6">
+          Closed at
+        </th>
+        <th scope="col" class="py-3 px-6">
+          View
         </th>
       </tr>
     </thead>
@@ -62,13 +62,13 @@
             <%=job.id%>
           </th>
           <td class="py-4 px-6">
-            email
+            <%=job.user.email%>
           </td>
           <td class="py-4 px-6">
-            service
+            <%=job.user.service%>
           </td>
           <td class="py-4 px-6">
-            unit
+            <%=job.user.unit%>
           </td>
           <td class="py-4 px-6">
             <%=job.nature_of_request%>
@@ -85,42 +85,37 @@
           <td class="py-4 px-6">
             <%=job.staff_id%>
           </td>
-          lass="py-4 px-6">
-          if no record on remarks model
-          <%=job.status%>
-          else
-          reference remarks model status
-        </td>
-        <td class="py-4 px-6">
-          remarks from remarks table
-        </td>
-        <td class="py-4 px-6">
-          <%=job.created_at.localtime.strftime("%b %d, '%y")%> |
-          <%=job.created_at.localtime.strftime('%H:%M')%>
-        </td>
-        <td class="py-4 px-6">
-          <%= link_to requestor_job_path(job) do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-          <%end%>
-        </td>
-        <%if job.evaluation == nil%>
           <td class="py-4 px-6">
-            <%if job.status == 'Done'%>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-              </svg>
+            <% if job.remarks.last == nil %>
+              <%=job.status%>
             <%else%>
+              <%=job.remarks.last.status%>
+            <%end%>
+          </td>
+          <td class="py-4 px-6">
+            <% if job.remarks.last != nil %>
+              <%=job.remarks.last.status%>
+            <%end%>
+          </td>
+          <td class="py-4 px-6">
+            <%=job.created_at.localtime.strftime("%b %d, '%y")%> |
+            <%=job.created_at.localtime.strftime('%H:%M')%>
+          </td>
+          <%if job.evaluation == nil%>
+            <%if job.status == 'Done'%>
+              <td class="py-4 px-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+              </td>
             <%end%>
           <%else%>
             <td class="py-4 px-6">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
               </svg>
-            <%end%>
-          </td>
+            </td>
+          <%end%>
           <td class="py-4 px-6">
             days queue
           </td>
@@ -129,6 +124,20 @@
           </td>
           <td class="py-4 px-6">
             days ongoing
+          </td>
+          <td class="py-4 px-6">
+            <% if job.closed_at !=nil%>
+              <%=job.closed_at.localtime.strftime("%b %d, '%y")%> |
+              <%=job.closed_at.localtime.strftime('%H:%M')%>
+            <%end%>
+          </td>
+          <td class="py-4 px-6">
+            <%= link_to admin_job_path(job) do %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            <%end%>
           </td>
         </tr>
       <%end%>
