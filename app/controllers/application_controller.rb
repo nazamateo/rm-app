@@ -17,4 +17,19 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError, 'Not Found' unless current_user.requestor?
   end
 
+  def convert_rating(rating)
+    case self
+    when 1
+        'Poor'
+    when 2
+        'Moderately Satisfactory'
+    when 3
+        'Satisfactory'
+    when 4
+        'Highly Satisfactory'
+    else 5
+        'Outstanding'
+    end
+end
+
 end

@@ -39,18 +39,5 @@ class Requestor::JobsController < ApplicationController
         params.require(:job).permit(:nature_of_request, :note_to_staff)
     end
 
-    def convert_rating(rating)
-        case self
-        when 1
-            'Poor'
-        when 2
-            'Moderately Satisfactory'
-        when 3
-            'Satisfactory'
-        when 4
-            'Highly Satisfactory'
-        else 5
-            'Outstanding'
-        end
-    end
+ 
 end

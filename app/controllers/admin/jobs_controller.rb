@@ -7,6 +7,15 @@ class Admin::JobsController < ApplicationController
     end
 
     def show
+        @jobs = Job.all
+        @job = @jobs.find params[:id]
+        
+        if @job.evaluation != nil
+            @response_time = convert_rating(@job.evaluation.response_time)           
+            @quality = convert_rating(@job.evaluation.quality)           
+            @courtesy = convert_rating(@job.evaluation.courtesy)
+            @comments = @job.evaluation.comments           
+        end
     end
 
     def update
