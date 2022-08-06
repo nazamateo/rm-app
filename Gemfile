@@ -58,3 +58,8 @@ end
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+# Use Redis for Action Cable
+gem 'redis', '~> 4.0'

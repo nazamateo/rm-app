@@ -21,10 +21,10 @@
           Note to engineering
         </th>
         <th scope="col" class="py-3 px-6">
-          Assessed by
+          Maintenance Unit
         </th>
         <th scope="col" class="py-3 px-6">
-          Maintenance Unit
+          Assessed by
         </th>
         <th scope="col" class="py-3 px-6">
           Assigned to
@@ -77,14 +77,28 @@
             <%=job.note_to_staff%>
           </td>
           <td class="py-4 px-6">
-            <%=job.assessor_id%>
-          </td>
-          <td class="py-4 px-6">
             <%=job.maintenance_unit%>
           </td>
-          <td class="py-4 px-6">
-            <%=job.staff_id%>
-          </td>
+          <% if job.assessor_id == nil %>
+            <%= form_with model: job, url: admin_job_path(job.id), method: :patch do |form| %>
+              <td class="py-4 px-6">
+                <%= form.select :assessor_id, Personnel.all.where(maintenance_unit: 'Engineering').collect{|p| [p.surname, p.id]}, prompt: "Select One" %>
+              </td>
+              <td class="py-4 px-6">
+                <%= form.select :staff_id, Personnel.all.where.not(maintenance_unit: 'Engineering').collect{|p| [p.surname, p.id]}, prompt: "Select One" %>
+                <p>
+                  <%= form.submit %>
+                </p>
+              </td>
+            <% end %>
+          <% else %>
+            <td class="py-4 px-6">
+              <%=job.assessor_id%>
+            </td>
+            <td class="py-4 px-6">
+              <%=job.staff_id%>
+            </td>
+          <% end %>
           <td class="py-4 px-6">
             <% if job.remarks.last == nil %>
               <%=job.status%>
