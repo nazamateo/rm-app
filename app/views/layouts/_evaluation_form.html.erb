@@ -58,15 +58,15 @@
           <%=@job.note_to_staff.capitalize%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.remarks.last == nil %>
+          <% if @job.remark.last == nil %>
             <%=@job.status%>
           <%else%>
-            <%=@job.remarks.last.status%>
+            <%=@job.remark.last.status%>
           <%end%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.remarks.last != nil %>
-            <%=@job.remarks.last.remarks.capitalize%>
+          <% if @job.remark.last.remarks != nil %>
+            <%=@job.remark.last.remarks.capitalize%>
           <%end%>
         </td>
         <td class="ps="py-4 px-6">

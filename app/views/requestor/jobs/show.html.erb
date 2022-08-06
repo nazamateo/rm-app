@@ -58,15 +58,15 @@
           <%=@job.note_to_staff.capitalize%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.remarks.last == nil %>
+          <% if @job.remark.last == nil %>
             <%=@job.status%>
           <%else%>
-            <%=@job.remarks.last.status%>
+            <%=@job.remark.last.status%>
           <%end%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.remarks.last != nil %>
-            <%=@job.remarks.last.remarks.capitalize%>
+          <% if @job.remark.last.remarks != nil %>
+            <%=@job.remark.last.remarks.capitalize%>
           <%end%>
         </td>
         <td class="ps="py-4 px-6">
@@ -86,7 +86,7 @@
 </br>
 <div class="w-11/12 flex items-center justify-between">
   <div class="overflow-y-auto w-1/4 bg-blue-100 sm:rounded-lg">
-    <% @job.remarks.each do |entry| %>
+    <% @job.remark.each do |entry| %>
       <h3 class="flex items-center justify-center"><%=entry.created_at.localtime.strftime("%b %d, '%y")%></h3>
       <p>Status: <%=entry.status%></p>
       <p>Remarks: <%=entry.remarks%></p>

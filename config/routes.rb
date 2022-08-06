@@ -16,7 +16,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :dashboard, only: %i[index]
-    resources :jobs, only: %i[index show edit update]
+    resources :jobs, only: %i[index show update] do
+      resources :remarks, only: %i[create]
+    end
+
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

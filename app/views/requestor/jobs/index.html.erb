@@ -38,15 +38,15 @@
             <%=job.note_to_staff.capitalize%>
           </td>
           <td class="py-4 px-6">
-            <% if job.remarks.last == nil %>
+            <% if job.remark.last == nil %>
               <%=job.status%>
             <%else%>
-              <%=job.remarks.last.status.capitalize%>
+              <%=job.remark.last.status.capitalize%>
             <%end%>
           </td>
           <td class="py-4 px-6">
-            <% if job.remarks.last != nil %>
-              <%=job.remarks.last.status%>
+            <% if job.remark.last.remarks != nil %>
+              <%=job.remark.last.remarks%>
             <%end%>
           </td>
           <td class="py-4 px-6">
@@ -63,7 +63,7 @@
           </td>
           <%if job.evaluation == nil%>
             <td class="py-4 px-6">
-              <% job.remarks.each do |entry| %>
+              <% job.remark.each do |entry| %>
                 <%if entry.status == 'Done'%>
                   <%= link_to new_requestor_job_evaluation_path(job) do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

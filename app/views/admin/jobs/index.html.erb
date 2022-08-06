@@ -76,16 +76,15 @@
           <td class="py-4 px-6">
             <%=job.note_to_staff%>
           </td>
-          <td class="py-4 px-6">
-            <%=job.maintenance_unit%>
-          </td>
-          <% if job.assessor_id == nil %>
+          <% if job.assessor_id == nil || job.staff_id == nil %>
+            <td class="py-4 px-6">
+            </td>
             <%= form_with model: job, url: admin_job_path(job.id), method: :patch do |form| %>
               <td class="py-4 px-6">
-                <%= form.select :assessor_id, Personnel.all.where(maintenance_unit: 'Engineering').collect{|p| [p.surname, p.id]}, prompt: "Select One" %>
+                <%= form.select :assessor_id, Personnel.all.where(maintenance_unit: 'Engineering').collect{|p| [ "Engr. #{p.surname}", p.id]}, prompt: "Select One" %>
               </td>
               <td class="py-4 px-6">
-                <%= form.select :staff_id, Personnel.all.where.not(maintenance_unit: 'Engineering').collect{|p| [p.surname, p.id]}, prompt: "Select One" %>
+                <%= form.select :staff_id, Personnel.all.where.not(maintenance_unit: 'Engineering').collect{|p| ["#{p.surname}, #{p.name[0,1]}", p.id]}, prompt: "Select One" %>
                 <p>
                   <%= form.submit %>
                 </p>
@@ -93,22 +92,37 @@
             <% end %>
           <% else %>
             <td class="py-4 px-6">
-              <%=job.assessor_id%>
+              <%=Personnel.all.find_by(id: job.staff_id).maintenance_unit%>
             </td>
             <td class="py-4 px-6">
-              <%=job.staff_id%>
+              <%= Personnel.all.find_by(id: job.assessor_id).surname%>
+            </td>
+            <td class="py-4 px-6">
+              <%=Personnel.all.find_by(id: job.staff_id).surname%>
             </td>
           <% end %>
           <td class="py-4 px-6">
-            <% if job.remarks.last == nil %>
-              <%=job.status%>
+            <% if job.remark.last == nil %>
+              Queue
+              <%= form_with model: job.remark.build, url: admin_job_remarks_path(job.id) do |form| %>
+                <%= form.select :status, options_for_select([["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+                <%= form.submit %>
+              <% end %>
             <%else%>
-              <%=job.remarks.last.status%>
+              <% if job.remark.last.status == 'Done' %>
+                Done
+              <% else %>
+                <%=job.remark.last.status%>
+                <%= form_with model: job.remark.build, url: admin_job_remarks_path(job.id) do |form| %>
+                  <%= form.select :status, options_for_select([["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+                  <%= form.submit %>
+                <% end %>
+              <% end %>
             <%end%>
           </td>
           <td class="py-4 px-6">
-            <% if job.remarks.last != nil %>
-              <%=job.remarks.last.status%>
+            <% if job.remark.last != nil %>
+              <%=job.remark.last.remarks%>
             <%end%>
           </td>
           <td class="py-4 px-6">

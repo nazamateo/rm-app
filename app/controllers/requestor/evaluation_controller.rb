@@ -5,7 +5,7 @@ class Requestor::EvaluationController < ApplicationController
     def new
         @current_user_jobs = current_user.jobs
         @job = @current_user_jobs.find params[:job_id]
-        verify_status(@job.remarks.last.status)
+        verify_status(@job.remark.last.status)
         @evaluation = @job.build_evaluation
     end
 

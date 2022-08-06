@@ -9,10 +9,6 @@ class Admin::JobsController < ApplicationController
     def show
     end
 
-    def edit
-        @job = Job.find params[:id]
-    end
-
     def update
         @job = Job.find params[:id]
         respond_to do |format|

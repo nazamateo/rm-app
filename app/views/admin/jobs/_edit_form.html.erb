@@ -1,4 +1,0 @@
-<%= form_with model: @job, url: admin_job, method: :patch do |form| %>
-  <%= form.select(:assessor_id, Personnel.all.where(maintenance_unit: 'Engineering').collect{|p| [p.name]}, prompt: "Select One" %>
-  <%= form.submit %>
-<% end %>
