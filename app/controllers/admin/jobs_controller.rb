@@ -23,8 +23,6 @@ class Admin::JobsController < ApplicationController
         respond_to do |format|
             if @job.update(job_update_params)
                 format.html { redirect_to admin_jobs_path, notice: "Job Order# #{@job.id} was successfully updated!." }
-            else
-                format.html { render :index, status: :unprocessable_entity }
             end
         end
     end

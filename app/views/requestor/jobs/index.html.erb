@@ -39,13 +39,13 @@
           </td>
           <td class="py-4 px-6">
             <% if job.remark.last == nil %>
-              <%=job.status%>
+              Queue
             <%else%>
               <%=job.remark.last.status.capitalize%>
             <%end%>
           </td>
           <td class="py-4 px-6">
-            <% if job.remark.last.remarks != nil %>
+            <% if job.remark.last != nil %>
               <%=job.remark.last.remarks%>
             <%end%>
           </td>

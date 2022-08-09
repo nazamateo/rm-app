@@ -86,42 +86,51 @@
               <%=Personnel.all.find_by(id: job.staff_id).maintenance_unit%>
             </td>
             <td class="py-4 px-6">
-              <%= Personnel.all.find_by(id: job.assessor_id).surname%>
+              Engr. <%= Personnel.all.find_by(id: job.assessor_id).surname%>
             </td>
             <td class="py-4 px-6">
-              <%=Personnel.all.find_by(id: job.staff_id).surname%>
+              <%=Personnel.all.find_by(id: job.staff_id).surname%>, <%= Personnel.all.find_by(id: job.staff_id).name[0,1]%>
             </td>
           <% end %>
-          <td class="py-4 px-6">
-            <% if job.remark.last == nil %>
-              Queue
-              <%= form_with model: job.remark.build, url: admin_job_remarks_path(job.id) do |form| %>
-                <%= form.select :status, options_for_select([["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+          <% if job.remark.last == nil %>
+            <%= form_with model: job.remark.build, url: admin_job_remarks_path(job.id) do |form| %>
+              <td class="py-4 px-6">
+                Queue
+                <%= form.select :status, options_for_select([["Cancelled"],["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+              </td>
+              <td class="py-4 px-6">
+                <%= form.text_field :remarks %>
                 <%= form.submit %>
-              <% end %>
-            <%else%>
-              <% if job.remark.last.status == 'Done' %>
-                Done
-              <% else %>
+              </td>
+            <% end %>
+          <%else%>
+            <% if job.remark.last.status == 'Done' || job.remark.last.status == 'Cancelled' %>
+              <td class="py-4 px-6">
                 <%=job.remark.last.status%>
-                <%= form_with model: job.remark.build, url: admin_job_remarks_path(job.id) do |form| %>
-                  <%= form.select :status, options_for_select([["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+              </td>
+              <td class="py-4 px-6">
+                <%=job.remark.last.remarks%>
+              </td>
+            <%else%>
+              <%= form_with model: job.remark.build, url: admin_job_remarks_path(job.id) do |form| %>
+                <td class="py-4 px-6">
+                  <%= job.remark.last.status%>
+                  <%= form.select :status, options_for_select([["Cancelled"],["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+                </td>
+                <td class="py-4 px-6">
+                  <%=job.remark.last.remarks%>
+                  <%= form.text_field :remarks %>
                   <%= form.submit %>
-                <% end %>
+                </td>
               <% end %>
             <%end%>
-          </td>
-          <td class="py-4 px-6">
-            <% if job.remark.last != nil %>
-              <%=job.remark.last.remarks%>
-            <%end%>
-          </td>
+          <%end%>
           <td class="py-4 px-6">
             <%=job.created_at.localtime.strftime("%b %d, '%y")%> |
             <%=job.created_at.localtime.strftime('%H:%M')%>
           </td>
           <td class="py-4 px-6">
-            <% if job.remark.last.status == 'Done'%>
+            <% if job.remark.last.status == 'Done' || job.remark.last.status == 'Cancelled'%>
               <%=job.remark.last.created_at.localtime.strftime("%b %d, '%y")%> |
               <%=job.remark.last.created_at.strftime('%H:%M')%>
             <%end%>

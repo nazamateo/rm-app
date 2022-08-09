@@ -6,8 +6,6 @@ class Admin::RemarksController < ApplicationController
         respond_to do |format|
             if  @remark.save
                 format.html { redirect_to admin_jobs_path,  notice: "Job Order# #{@job.id} was successfully updated!." }
-            else
-                format.html { render :index, status: :unprocessable_entity }
             end
         end
     end

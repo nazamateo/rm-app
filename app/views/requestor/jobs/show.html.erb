@@ -1,15 +1,21 @@
 <div class="w-11/12 flex items-center justify-between">
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Assessed by:  </p>
-    <p> Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%></p>
+    <% if @job.assessor != nil %>
+      <p> Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Assigned to: </p>
-    <p><%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%></p>
+    <% if @job.assessor != nil %>
+      <p><%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Maintenance group:  </p>
-    <p><%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%></p>
+    <% if @job.assessor != nil %>
+      <p><%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -59,13 +65,13 @@
         </td>
         <td class="py-4 px-6">
           <% if @job.remark.last == nil %>
-            <%=@job.status%>
+            Queue
           <%else%>
             <%=@job.remark.last.status%>
           <%end%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.remark.last.remarks != nil %>
+          <% if @job.remark.last != nil %>
             <%=@job.remark.last.remarks.capitalize%>
           <%end%>
         </td>
