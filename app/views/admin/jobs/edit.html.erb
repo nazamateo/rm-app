@@ -1,0 +1,34 @@
+<%= form_with model: job, url: admin_job_path(job.id), method: :patch do |form| %>
+  <td class="py-4 px-6">
+    <%= form.select :assessor_id, Personnel.all.where(maintenance_unit: 'Engineering').collect{|p| [ "Engr. #{p.surname}", p.id]}, prompt: "Select One" %>
+  </td>
+  <td class="py-4 px-6">
+    <%= form.select :staff_id, Personnel.all.where.not(maintenance_unit: 'Engineering').collect{|p| ["#{p.surname}, #{p.name[0,1]}", p.id]}, prompt: "Select One" %>
+    <p>
+      <%= form.submit %>
+    </p>
+  </td>
+<% end %>
+<%= form_with model: job.remark.build, url: admin_job_remarks_path(job.id) do |form| %>
+  <td class="py-4 px-6">
+    Queue
+    <%= form.select :status, options_for_select([["Cancelled"],["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+  </td>
+  <td class="py-4 px-6">
+    <%= form.text_field :remarks %>
+    <%= form.submit %>
+  </td>
+<% end %>
+<%= form_with model: job.remark.build, url: admin_job_remarks_path(job.id) do |form| %>
+  <td class="py-4 px-6">
+    <%= job.remark.last.status%>
+    <%= form.select :status, options_for_select([["Cancelled"],["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+  </td>
+  <td class="py-4 px-6">
+    <%=job.remark.last.remarks%>
+    <%= form.text_field :remarks %>
+    <%= form.submit %>
+  </td>
+<% end %>
+<%end%>
+<%end%>
