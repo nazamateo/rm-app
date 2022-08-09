@@ -7,8 +7,7 @@ class Admin::JobsController < ApplicationController
     end
 
     def show
-        @jobs = Job.all
-        @job = @jobs.find params[:id]
+        @job = Job.all.find params[:id]
         
         if @job.evaluation != nil
             @response_time = convert_rating(@job.evaluation.response_time)           
@@ -18,13 +17,17 @@ class Admin::JobsController < ApplicationController
         end
     end
 
+    def edit
+        @job = Job.find params[:id]
+    end
+
     def update
         @job = Job.find params[:id]
-        respond_to do |format|
             if @job.update(job_update_params)
-                format.html { redirect_to admin_jobs_path, notice: "Job Order# #{@job.id} was successfully updated!." }
+                redirect_to admin_job_path(@job), notice: "Job Order# #{@job.id} was successfully updated!"
+            else
+                render :edit, status: :unprocessable_entity
             end
-        end
     end
 
     private

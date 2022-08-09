@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :dashboard, only: %i[index]
     resources :jobs, only: %i[index show edit update] do
-      resources :remarks, only: %i[create]
+      resources :remarks, only: %i[new create]
     end
 
   end

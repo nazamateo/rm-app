@@ -1,13 +1,17 @@
 class Admin::RemarksController < ApplicationController
     
+    def new
+        @job = Job.all.find params[:job_id]
+    end
+
     def create
         @job = Job.all.find params[:job_id]
         @remark = @job.remark.build(remarks_params)
-        respond_to do |format|
             if  @remark.save
-                format.html { redirect_to admin_jobs_path,  notice: "Job Order# #{@job.id} was successfully updated!." }
+                redirect_to admin_job_path(@job),  notice: "Job Order# #{@job.id} was successfully updated!." 
+            else
+                render :new, status: :unprocessable_entity
             end
-        end
     end
 
     private

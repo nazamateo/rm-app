@@ -1,15 +1,28 @@
 <div class="w-11/12 flex items-center justify-between">
   <div class="mt-2 flex items-center text-sm text-gray-500">
+    <% if @job.assessor_id == nil %>
+      <%= link_to edit_admin_job_path(@job) do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+        </svg>
+      <%end%>
+    <% end %>
     <p>Assessed by:  </p>
-    <p> Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%></p>
+    <% if @job.assessor_id!= nil %>
+      <p> Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Assigned to: </p>
-    <p><%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%></p>
+    <% if @job.staff_id != nil %>
+      <p><%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Maintenance group:  </p>
-    <p><%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%></p>
+    <% if @job.staff_id != nil %>
+      <p><%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -59,13 +72,13 @@
         </td>
         <td class="py-4 px-6">
           <% if @job.remark.last == nil %>
-            <%=@job.status%>
+            Queue
           <%else%>
             <%=@job.remark.last.status%>
           <%end%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.remark.last.remarks != nil %>
+          <% if @job.remark.last != nil %>
             <%=@job.remark.last.remarks.capitalize%>
           <%end%>
         </td>
@@ -74,9 +87,11 @@
           <%=@job.created_at.localtime.strftime('%H:%M')%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.closed_at !=nil%>
-            <%=@job.closed_at.localtime.strftime("%b %d, '%y")%> |
-            <%=@job.closed_at.localtime.strftime('%H:%M')%>
+          <% if @job.remark.last. != nil %>
+            <% if @job.remark.last.status == 'Done' || 'Cancelled' %>
+              <%=@job.remark.last.created_at.localtime.strftime("%b %d, '%y")%> |
+              <%=@job.remark.last.created_at.localtime.strftime('%H:%M')%>
+            <%end%>
           <%end%>
         </td>
       </tr>
@@ -86,7 +101,15 @@
 </br>
 <div class="w-11/12 flex items-center justify-between">
   <div class="overflow-y-auto w-1/4 bg-blue-100 sm:rounded-lg">
-    <% @job.remark.each do |entry| %>
+    <% if @job.remark.last == nil %>
+      <%= link_to 'Add remarks',new_admin_job_remark_path(@job) %>
+    <%else%>
+      <% if @job.remark.last.status == "Done" || @job.remark.last.status == "Cancelled"%>
+      <%else%>
+        <%= link_to 'Add remarks',new_admin_job_remark_path(@job) %>
+      <%end%>
+    <%end%>
+    <% @job.remark.order(created_at: :desc).each do |entry| %>
       <h3 class="flex items-center justify-center"><%=entry.created_at.localtime.strftime("%b %d, '%y")%></h3>
       <p>Status: <%=entry.status%></p>
       <p>Remarks: <%=entry.remarks%></p>

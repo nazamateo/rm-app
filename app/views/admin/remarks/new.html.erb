@@ -1,0 +1,5 @@
+<%= form_with model:@job.remark.build, url: admin_job_remarks_path(@job) do |form| %>
+  Status: <%= form.select :status, options_for_select([["Cancelled"],["Pending"],["Ongoing"],["Done"]]), prompt: "Select One" %>
+  Remarks: <%= form.text_field :remarks %>
+  <%= form.submit %>
+<%end%>

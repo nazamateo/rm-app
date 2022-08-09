@@ -1,15 +1,21 @@
 <div class="w-11/12 flex items-center justify-between">
   <div class="mt-2 flex items-center text-sm text-gray-500">
-    <p>Assessed by: </p>
-    <p><%=@job.assessor%></p>
+    <p>Assessed by:  </p>
+    <% if @job.assessor_id!= nil %>
+      <p> Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Assigned to: </p>
-    <p><%=@job.staff%></p>
+    <% if @job.staff_id != nil %>
+      <p><%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Maintenance group:  </p>
-    <p><%=@job.maintenance_unit%></p>
+    <% if @job.staff_id != nil %>
+      <p><%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%></p>
+    <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -74,9 +80,9 @@
           <%=@job.created_at.localtime.strftime('%H:%M')%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.closed_at !=nil%>
-            <%=@job.closed_at.localtime.strftime("%b %d, '%y")%> |
-            <%=@job.closed_at.localtime.strftime('%H:%M')%>
+          <% if @job.remark.last.status == 'Done' || 'Cancelled' %>
+            <%=@job.remark.last.created_at.localtime.strftime("%b %d, '%y")%> |
+            <%=@job.remark.last.created_at.localtime.strftime('%H:%M')%>
           <%end%>
         </td>
       </tr>

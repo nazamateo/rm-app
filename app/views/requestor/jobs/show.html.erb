@@ -1,19 +1,19 @@
 <div class="w-11/12 flex items-center justify-between">
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Assessed by:  </p>
-    <% if @job.assessor != nil %>
+    <% if @job.assessor_id!= nil %>
       <p> Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%></p>
     <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Assigned to: </p>
-    <% if @job.assessor != nil %>
+    <% if @job.staff_id != nil %>
       <p><%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%></p>
     <%end%>
   </div>
   <div class="mt-2 flex items-center text-sm text-gray-500">
     <p>Maintenance group:  </p>
-    <% if @job.assessor != nil %>
+    <% if @job.staff_id != nil %>
       <p><%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%></p>
     <%end%>
   </div>
@@ -80,9 +80,11 @@
           <%=@job.created_at.localtime.strftime('%H:%M')%>
         </td>
         <td class="py-4 px-6">
-          <% if @job.closed_at !=nil%>
-            <%=@job.closed_at.localtime.strftime("%b %d, '%y")%> |
-            <%=@job.closed_at.localtime.strftime('%H:%M')%>
+          <% if @job.remark.last != nil%>
+            <% if @job.remark.last.status == 'Done' || 'Cancelled' %>
+              <%=@job.remark.last.created_at.localtime.strftime("%b %d, '%y")%> |
+              <%=@job.remark.last.created_at.localtime.strftime('%H:%M')%>
+            <%end%>
           <%end%>
         </td>
       </tr>
@@ -92,7 +94,7 @@
 </br>
 <div class="w-11/12 flex items-center justify-between">
   <div class="overflow-y-auto w-1/4 bg-blue-100 sm:rounded-lg">
-    <% @job.remark.each do |entry| %>
+    <% @job.remark.order(created_at: :desc).each do |entry| %>
       <h3 class="flex items-center justify-center"><%=entry.created_at.localtime.strftime("%b %d, '%y")%></h3>
       <p>Status: <%=entry.status%></p>
       <p>Remarks: <%=entry.remarks%></p>
