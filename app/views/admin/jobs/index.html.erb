@@ -1,11 +1,16 @@
 <%= search_form_for @q, url: admin_jobs_path do |f| %>
+  <%= f.label :user_email %>
+  <%= f.select :user_email_eq, options_from_collection_for_select(User.all, :email, :email, @q.user_email_eq), { :include_blank => true } %>
+  <%= f.label :user_service %>
+  <%= f.search_field :user_service_cont %>
+  <%= f.label :user_unit %>
+  <%= f.search_field :user_unit_cont %>
   <%= f.label :nature_of_request %>
   <%= f.search_field :nature_of_request_cont %>
-  <%= f.submit %>
-<% end %>
-<%= search_form_for @q, url: admin_jobs_path do |f| %>
-  <%= f.label :note_to_staff %>
-  <%= f.search_field :note_to_staff_cont %>
+  <%= f.label :assessor_id, 'Assesed by' %>
+  <%= f.select :assessor_id_eq, options_from_collection_for_select(Personnel.all.where(maintenance_unit: 'Engineering'), :id, :surname, @q.assessor_id_eq), { :include_blank => true } %>
+  <%= f.label :remark_status, 'Status' %>
+  <%= f.search_field :remark_status_cont %>
   <%= f.submit %>
 <% end %>
 <div class="overflow-x-auto flex items-center justify-center w-11/12 sm:rounded-lg">
@@ -13,16 +18,16 @@
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
         <th scope="col" class="py-3 px-6">
-          Job Order Number
+          <%= sort_link(@q, :id) %>
         </th>
         <th scope="col" class="py-3 px-6">
-          Email
+          <%= sort_link(@q, :user_email) %>
         </th>
         <th scope="col" class="py-3 px-6">
-          Service
+          <%= sort_link(@q, :user_service) %>
         </th>
         <th scope="col" class="py-3 px-6">
-          Unit
+          <%= sort_link(@q, :user_unit) %>
         </th>
         <th scope="col" class="py-3 px-6">
           Nature of request
@@ -31,7 +36,7 @@
           Note to engineering
         </th>
         <th scope="col" class="py-3 px-6">
-          Maintenance Unit
+          Maintenance unit
         </th>
         <th scope="col" class="py-3 px-6">
           <%= sort_link(@q, :assessor_id, 'Assesed by') %>
@@ -40,13 +45,13 @@
           <%= sort_link(@q, :staff_id, 'Assigned to') %>
         </th>
         <th scope="col" class="py-3 px-6">
-          Status
+          <%= sort_link(@q, :remark_status, 'Status') %>
         </th>
         <th scope="col" class="py-3 px-6">
           Remarks
         </th>
         <th scope="col" class="py-3 px-6">
-          Created at
+          <%= sort_link(@q, :created_at) %>
         </th>
         <th scope="col" class="py-3 px-6">
           Closed at

@@ -4,7 +4,7 @@ class Admin::JobsController < ApplicationController
     
     def index
         @q = Job.ransack(params[:q])
-        @jobs = @q.result
+        @jobs = @q.result.includes(:user, :remark, :evaluation, :assessor, :staff)
     end
 
     def show
