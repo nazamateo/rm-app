@@ -3,7 +3,8 @@ class Admin::JobsController < ApplicationController
     before_action :authenticate_admin
     
     def index
-        @jobs = Job.all.sort
+        @q = Job.ransack(params[:q])
+        @jobs = @q.result
     end
 
     def show

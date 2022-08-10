@@ -1,3 +1,13 @@
+<%= search_form_for @q, url: admin_jobs_path do |f| %>
+  <%= f.label :nature_of_request %>
+  <%= f.search_field :nature_of_request_cont %>
+  <%= f.submit %>
+<% end %>
+<%= search_form_for @q, url: admin_jobs_path do |f| %>
+  <%= f.label :note_to_staff %>
+  <%= f.search_field :note_to_staff_cont %>
+  <%= f.submit %>
+<% end %>
 <div class="overflow-x-auto flex items-center justify-center w-11/12 sm:rounded-lg">
   <table class="block w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -24,10 +34,10 @@
           Maintenance Unit
         </th>
         <th scope="col" class="py-3 px-6">
-          Assessed by
+          <%= sort_link(@q, :assessor_id, 'Assesed by') %>
         </th>
         <th scope="col" class="py-3 px-6">
-          Assigned to
+          <%= sort_link(@q, :staff_id, 'Assigned to') %>
         </th>
         <th scope="col" class="py-3 px-6">
           Status

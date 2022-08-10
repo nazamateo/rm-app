@@ -63,3 +63,5 @@ gem 'devise'
 gem "turbo-rails"
 # Use Redis for Action Cable
 gem 'redis', '~> 4.0'
+
+gem 'ransack'
