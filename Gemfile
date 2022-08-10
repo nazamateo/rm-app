@@ -42,6 +42,8 @@ group :development do
   # linter
   gem "standard"
 
+  gem 'mailjet'
+
 end
 
 group :test do
