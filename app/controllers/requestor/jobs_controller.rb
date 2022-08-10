@@ -24,13 +24,12 @@ class Requestor::JobsController < ApplicationController
 
     def create
         @job = current_user.jobs.build(jobs_params)
-        respond_to do |format|
             if  @job.save
-                format.html { redirect_to requestor_job_path(@job), notice: "Job Order was successfully created." }
+                UserMailer.with(user: current_user).job_created_email_noti.deliver_later
+                redirect_to requestor_job_path(@job), notice: "Job Order was successfully created."
             else
-                format.html { render :new, status: :unprocessable_entity }
+                render :new, status: :unprocessable_entity 
             end
-        end
     end
 
     private

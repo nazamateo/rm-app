@@ -8,7 +8,12 @@ class Admin::RemarksController < ApplicationController
         @job = Job.all.find params[:job_id]
         @remark = @job.remark.build(remarks_params)
             if  @remark.save
-                redirect_to admin_job_path(@job),  notice: "Job Order# #{@job.id} was successfully updated!." 
+                if @remark.status == 'Done' || @remark.status == 'Cancelled'
+                    UserMailer.with(job: @job, remark: @remark).job_closed_email_noti.deliver_later
+                    redirect_to admin_job_path(@job),  notice: "Job Order# #{@job.id} was successfully updated!." 
+                else
+                    redirect_to admin_job_path(@job),  notice: "Job Order# #{@job.id} was successfully updated!." 
+                end
             else
                 render :new, status: :unprocessable_entity
             end

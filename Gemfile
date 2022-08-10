@@ -41,6 +41,7 @@ group :development do
 
   # linter
   gem "standard"
+
 end
 
 group :test do

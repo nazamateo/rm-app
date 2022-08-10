@@ -1,0 +1,12 @@
+Hi <%= @user.name %>!
+===============================================
+Your job order with the following details is now closed.
+Job order number: <%=@job.id%>
+Nature of request: <%=@job.nature_of_request%>
+Note to engineering: <%=@job.note_to_staff%>
+Created at: <%=@job.created_at.localtime.strftime("%b %d,'%y")%> | <%=@job.created_at.localtime.strftime('%H:%M')%>
+Assigned to : Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%> & Sir <%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%> of <%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%> unit
+Status: <%=Remark.all.where(job_id: @job.id).last.status %>
+Remarks: <%=Remark.all.where(job_id: @job.id).last.remarks %>
+To help us improve our services, kindly provide your feedback on this link: <%= @url %>.
+Have a great day ahead!

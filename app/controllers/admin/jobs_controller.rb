@@ -25,6 +25,7 @@ class Admin::JobsController < ApplicationController
     def update
         @job = Job.find params[:id]
             if @job.update(job_update_params)
+                UserMailer.with(job: @job).job_update_email_noti.deliver_later
                 redirect_to admin_job_path(@job), notice: "Job Order# #{@job.id} was successfully updated!"
             else
                 render :edit, status: :unprocessable_entity

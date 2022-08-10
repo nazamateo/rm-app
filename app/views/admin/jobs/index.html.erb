@@ -9,8 +9,6 @@
   <%= f.search_field :nature_of_request_cont %>
   <%= f.label :assessor_id, 'Assesed by' %>
   <%= f.select :assessor_id_eq, options_from_collection_for_select(Personnel.all.where(maintenance_unit: 'Engineering'), :id, :surname, @q.assessor_id_eq), { :include_blank => true } %>
-  <%= f.label :remark_status, 'Status' %>
-  <%= f.search_field :remark_status_cont %>
   <%= f.submit %>
 <% end %>
 <div class="overflow-x-auto flex items-center justify-center w-11/12 sm:rounded-lg">

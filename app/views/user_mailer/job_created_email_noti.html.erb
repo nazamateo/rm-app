@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.name %>!</h1>
+    <h2>
+      You have successfully created a job order with the following details:
+    </h2>
+    <ul>
+      <li>Job order number: <%=@job.id%></li>
+      <li>Nature of request: <%=@job.nature_of_request%></li>
+      <li>Note to engineering: <%=@job.note_to_staff%></li>
+      <li>Created at: <%=@job.created_at.localtime.strftime("%b %d,'%y")%> | <%=@job.created_at.localtime.strftime('%H:%M')%></li>
+    </ul>
+    <p>
+      To view the status of your job order, just go to this link: <%= @url %>.
+    </p>
+    <p>Have a great day ahead!</p>
+  </body>
+</html>

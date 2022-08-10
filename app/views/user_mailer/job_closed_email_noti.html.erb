@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.name %>!</h1>
+    <p>
+      Your job order with the following details is now closed.
+    </p>
+    <ul>
+      <li>Job order number: <%=@job.id%></li>
+      <li>Nature of request: <%=@job.nature_of_request%></li>
+      <li>Note to engineering: <%=@job.note_to_staff%></li>
+      <li>Created at: <%=@job.created_at.localtime.strftime("%b %d,'%y")%> | <%=@job.created_at.localtime.strftime('%H:%M')%></li>
+      <li>Assigned to : Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%> & Sir <%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%> of <%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%> unit </li>
+      <li>Status: <%=Remark.all.where(job_id: @job.id).last.status %></li>
+      <li>Remarks: <%=Remark.all.where(job_id: @job.id).last.remarks %></li>
+    </ul>
+    <p>
+      To help us improve our services, kindly provide your feedback on this link: <%= @url %>.
+    </p>
+    <p>Have a great day ahead!</p>
+  </body>
+</html>
