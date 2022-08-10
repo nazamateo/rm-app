@@ -68,3 +68,7 @@ gem "turbo-rails"
 gem 'redis', '~> 4.0'
 
 gem 'ransack'
+
+group :development, :test do
+  gem 'rspec-rails'
+end
