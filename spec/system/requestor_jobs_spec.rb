@@ -7,7 +7,8 @@ RSpec.describe "View all traders", type: :system do
 
   let(:admin) { create(:admin) }
   let(:requestor) { create(:requestor) }
-
+  
+  
   context "when user is an requestor" do
     it "can submit a job request" do
       sign_in requestor
@@ -25,18 +26,57 @@ RSpec.describe "View all traders", type: :system do
         sleep(0.5)
       }.to change(Job, :count).by(1)
       expect(page).to have_text("Job Order was successfully created.")
+      expect(page).to have_text("Queue")
 
     end
   end
+
+    context "when user is a requestor" do
+    it "can view all his job request" do
+      sign_in requestor
+      new_job = create(:newly_created, user: requestor)
+
+
+      visit requestor_jobs_path
+      expect(page).to have_css 'table'
+      expect(page).to have_text(new_job.nature_of_request)
+      expect(page).to have_xpath(".//tr", :count => requestor.jobs.count + 1)
+      expect(page).not_to have_link(href: new_requestor_job_evaluation_path(new_job))
+    end
+  end
+
+  context "when user is a requestor" do
+    it "can give feedback when job order is done" do
+      sign_in requestor
+      done_job = create(:done, user: requestor)
+      create(:remark_done_requestor, job: done_job)
+      
+      
+      visit requestor_jobs_path
+      expect(page).to have_css 'table'
+      expect(page).to have_text("Done")
+      expect(page).to have_link(href: new_requestor_job_evaluation_path(done_job))
+      
+      visit new_requestor_job_evaluation_path(done_job)
+      expect(page).to have_css 'table'
+      expect(page).to have_css 'form'
+      choose('evaluation_response_time_5')
+      choose('evaluation_response_time_5')
+      choose('evaluation_response_time_5')
+      fill_in "evaluation[comments]", with: 'Very good job! keep it up'
+      click_on 'Create Evaluation'
+      expect(page).to have_text("Thank you for your feedback! We are glad to be of service.")
+    end
+  end
+
+
 
 #   sad
-
-context "when user is an admin" do
+  context "when user is an admin" do
     it "cant submit a job request" do
-      sign_in admin
-      expect{visit new_requestor_job_path}.to raise_error( ActionController::RoutingError)
+        sign_in admin
+        expect{visit new_requestor_job_path}.to raise_error( ActionController::RoutingError)
     end
   end
-
 
 end

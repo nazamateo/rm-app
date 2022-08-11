@@ -12,6 +12,12 @@ FactoryBot.define do
         remarks {'n.a'}
         association :job, factory: :done
     end
+
+    trait :remark_done_requestor do
+        status {'Done'}
+        remarks {'n.a'}
+    end
+
     
     trait :remark_cancelled do
         status {'Cancelled'}
@@ -22,6 +28,7 @@ FactoryBot.define do
     factory :remark_ongoing, traits: %i[remark_ongoing]
     factory :remark_done, traits: %i[remark_done]
     factory :remark_cancelled, traits: %i[remark_cancelled]
+    factory :remark_done_requestor, traits: %i[remark_done_requestor]
 
   end
 end
