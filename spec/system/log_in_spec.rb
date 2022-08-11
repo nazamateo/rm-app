@@ -51,6 +51,4 @@ RSpec.describe "Log In", type: :system do
     end
   end
 
-
-
 end
