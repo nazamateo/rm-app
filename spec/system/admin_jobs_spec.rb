@@ -75,14 +75,16 @@ RSpec.describe "View all traders", type: :system do
       expect(page).to have_text('Assessor')
       expect(page).to have_text('Assigned to')
 
-      find('#job_assessor_id option:first-of-type').select_option
-      find('#job_staff_id option:first-of-type').select_option
-      within("form") { click_on("Update Job") }
 
+      select( "Engr. #{engineer.surname}", from: 'job_assessor_id')
+      select( "#{staff.surname}, #{staff.name[0,1]}", from: 'job_staff_id')
+
+      within("form") { click_on("Update Job") }
+      
       expect(current_path).to eql(admin_job_path(newly_created))
       expect(page).to have_text("Job Order# #{newly_created.id} was successfully updated!")
-
-
+      
+      expect(newly_created.reload.assessor_id).to eq engineer.id
 
     end
   end
@@ -91,9 +93,22 @@ RSpec.describe "View all traders", type: :system do
     it "can add remarks to job orders" do
       sign_in admin
       visit admin_jobs_path
-
+      
       visit admin_job_path(newly_created)
       click_on('Add remarks')
+      expect(current_path).to eql(new_admin_job_remark_path(newly_created))
+      expect(page).to have_text('Status')
+      expect(page).to have_text('Remarks')
+      
+      select('Ongoing', from: 'remark_status')
+      fill_in "remark[remarks]", with: 'On going'
+      find('input[name="commit"]').click
+      expect(current_path).to eql(admin_job_path(newly_created))
+      expect(page).to have_text("Job Order# #{newly_created.id} was successfully updated!.")
+
+      expect(newly_created.remark.last.reload.status).to eq 'Ongoing'
+      expect(page).to have_text('On going')
+
     end
   end
 
