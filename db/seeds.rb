@@ -11,17 +11,7 @@ User.create!(name: 'Nazareno',
             position: 'Mechanical Engineer',
             unit: 'Engineering',
             service: 'General Services',
-            email: 'nazamateo@gmail.com',
-            password: 'abc123',
-            password_confirmation: 'abc123',
-            role: 1)
-
-User.create!(name: 'Nazareno',
-            surname: 'Mateo',
-            position: 'Mechanical Engineer',
-            unit: 'Engineering',
-            service: 'General Services',
-            email: 'nrmateo@dlshsi.edu.ph',
+            email: 'admin@engineering.com',
             password: 'abc123',
             password_confirmation: 'abc123',
             role: 0)
@@ -31,7 +21,7 @@ User.create!(name: 'Nazareno',
             position: 'Mechanical Engineer',
             unit: 'Engineering',
             service: 'General Services',
-            email: 'nrmateo1@dlshsi.edu.ph',
+            email: 'nrmateo@dlshsi.edu.ph',
             password: 'abc123',
             password_confirmation: 'abc123',
             role: 1)
@@ -45,8 +35,7 @@ User.create!(name: 'Nazareno',
             password: 'abc123',
             password_confirmation: 'abc123',
             role: 1)
-
-
+            
             Personnel.create!(name: 'Nazareno',
             surname: 'Mateo',
             maintenance_unit: 'Engineering',
