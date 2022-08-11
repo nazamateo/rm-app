@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :job do
     association :user, factory: :requestor
     nature_of_request { "Renovation of engineering office" }
-    note_to_staff { "Deadline Dec 2022" }
+    note_to_staff { "Deadline dec 2022" }
 
     trait :not_yet_assigned do
     end
