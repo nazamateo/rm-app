@@ -104,10 +104,30 @@ RSpec.describe "View all traders", type: :system do
       fill_in "remark[remarks]", with: 'On going'
       find('input[name="commit"]').click
       expect(current_path).to eql(admin_job_path(newly_created))
-      expect(page).to have_text("Job Order# #{newly_created.id} was successfully updated!.")
+      expect(page).to have_text("Job Order# #{newly_created.id} was successfully updated!")
 
       expect(newly_created.remark.last.reload.status).to eq 'Ongoing'
       expect(page).to have_text('On going')
+
+    end
+  end
+
+  
+  context "when user is an admin" do
+    it "can add close job orders" do
+      sign_in admin
+      visit admin_jobs_path
+      
+      visit admin_job_path(newly_created)
+      click_on('Add remarks')
+      expect(current_path).to eql(new_admin_job_remark_path(newly_created))
+      select('Done', from: 'remark_status')
+      fill_in "remark[remarks]", with: 'done'
+      find('input[name="commit"]').click
+      expect(current_path).to eql(admin_job_path(newly_created))
+      expect(page).to have_text("Job Order# #{newly_created.id} was successfully closed!")
+
+      expect(newly_created.remark.last.reload.status).to eq 'Done'
 
     end
   end

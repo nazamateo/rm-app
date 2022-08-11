@@ -49,4 +49,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def done_or_cancelled?
+    @remark.status == 'Done' || @remark.status == 'Cancelled'
+  end
+
 end
