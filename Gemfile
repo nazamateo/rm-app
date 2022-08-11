@@ -42,7 +42,7 @@ group :development do
   # linter
   gem "standard"
 
-  gem 'mailjet'
+
 
 end
 
@@ -55,6 +55,8 @@ group :test do
 
   # linter
   gem "standard"
+
+    gem "faker"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -71,4 +73,6 @@ gem 'ransack'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'mailjet'
 end
