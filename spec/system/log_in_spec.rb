@@ -4,6 +4,7 @@ RSpec.describe "Admin Log In", type: :system do
   before do
     driven_by(:rack_test)
   end
+  
     let(:admin) { create(:admin) }
     let(:requestor) { create(:requestor) }
     context "with valid credentials" do
