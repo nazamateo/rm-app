@@ -6,4 +6,5 @@ class Job < ApplicationRecord
     belongs_to :staff, class_name: 'Personnel', foreign_key: 'staff', optional: true
     has_one :evaluation
     has_many :remark
+    
 end

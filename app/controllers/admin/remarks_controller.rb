@@ -2,13 +2,12 @@ class Admin::RemarksController < ApplicationController
 
     before_action :authenticate_user!
     before_action :authenticate_admin
+    before_action :set_job, only: %i[ new create ]
     
     def new
-        @job = Job.all.find params[:job_id]
     end
 
     def create
-        @job = Job.all.find params[:job_id]
         @remark = @job.remark.build(remarks_params)
             if  @remark.save
                 if @remark.status == 'Done' || @remark.status == 'Cancelled'
@@ -26,5 +25,9 @@ class Admin::RemarksController < ApplicationController
     def remarks_params
         params.require(:remark).permit(:status, :remarks)
     end
- 
+    
+    def set_job
+        @job = Job.all.find params[:job_id]
+    end
+  
 end

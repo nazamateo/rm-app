@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-    protected
+  protected
     def after_sign_in_path_for(resource)
     if resource.role == 'admin'
       admin_dashboard_index_path
@@ -16,6 +16,23 @@ class ApplicationController < ActionController::Base
   def authenticate_requestor
     raise ActionController::RoutingError, 'Not Found' unless current_user.requestor?
   end
+  
+  def set_jobs
+    @jobs = current_user.jobs
+  end
+  
+  def show_evaluation
+    if @job.evaluation != nil
+      convert_evaluation
+    end
+  end
+
+  def convert_evaluation
+      @response_time = convert_rating(@job.evaluation.response_time)           
+      @quality = convert_rating(@job.evaluation.quality)           
+      @courtesy = convert_rating(@job.evaluation.courtesy)
+      @comments = @job.evaluation.comments   
+  end
 
   def convert_rating(rating)
     case self
@@ -30,6 +47,6 @@ class ApplicationController < ActionController::Base
     else 5
         'Outstanding'
     end
-end
+  end
 
 end
