@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin Log In", type: :system do
+RSpec.describe "Log In", type: :system do
   before do
     driven_by(:rack_test)
   end
@@ -28,5 +28,29 @@ RSpec.describe "Admin Log In", type: :system do
 
     end
   end
+  
+  context "with valid credentials" do
+    it "allows requestor to sign in" do
+      visit(new_user_session_path)
+      fill_in "user_email", with: requestor.email
+      fill_in "user_password", with: requestor.password
+      within("form") { click_on("Log in") }
+
+      expect(page).to have_current_path(requestor_dashboard_index_path)
+    end
+  end
+
+  context "with invalid credentials" do
+    it "deny requestor to sign in" do
+      visit(new_user_session_path)
+      fill_in "user_email", with: requestor.email
+      fill_in "user_password", with: admin.password
+      within("form") { click_on("Log in") }
+      expect(page).to have_current_path(new_user_session_path)
+
+    end
+  end
+
+
 
 end
