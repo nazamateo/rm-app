@@ -8,14 +8,8 @@
       Your job order with the following details is now assigned to Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%> and Sir <%=Personnel.all.find_by(id: @job.staff_id).surname%>, <%=Personnel.all.find_by(id: @job.staff_id).name[0,1]%> of <%=Personnel.all.find_by(id: @job.staff_id).maintenance_unit%> unit.
     </p>
     <ul>
-      <li>Job order number: <%=@job.id%></li>
-      <li>Nature of request: <%=@job.nature_of_request%></li>
-      <li>Note to engineering: <%=@job.note_to_staff%></li>
-      <li>Created at: <%=@job.created_at.localtime.strftime("%b %d,'%y")%> | <%=@job.created_at.localtime.strftime('%H:%M')%></li>
+      <%= render "job_details"%>
     </ul>
-    <p>
-      To view the status of your job order, just go to this link: <%= @url %>.
-    </p>
-    <p>Have a great day ahead!</p>
+    <%= render "job_details"%>
   </body>
 </html>

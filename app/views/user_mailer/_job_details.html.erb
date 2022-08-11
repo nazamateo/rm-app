@@ -1,0 +1,4 @@
+<li>Job order number: <%=@job.id%></li>
+<li>Nature of request: <%=@job.nature_of_request%></li>
+<li>Note to engineering: <%=@job.note_to_staff%></li>
+<li>Created at: <%=@job.created_at.localtime.strftime("%b %d,'%y")%> | <%=@job.created_at.localtime.strftime('%H:%M')%></li>

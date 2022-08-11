@@ -16,7 +16,7 @@ class UserMailer < ApplicationMailer
     def job_closed_email_noti
         @job = params[:job]
         @user = User.all.find_by(id: @job.user_id)
-        @url  = "http://localhost:3000/requestor/jobs/#{@job.id}"
+        @url  = "http://localhost:3000/requestor/jobs/#{@job.id}/evaluation/new"
         mail(to: @user.email, subject: "Job order number #{@job.id} closed.")
     end
 
