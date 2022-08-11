@@ -79,4 +79,14 @@ RSpec.describe "View all traders", type: :system do
     end
   end
 
+  context "when user is an admin" do
+    it "cant give feedback when job order is done" do
+      sign_in admin
+      done_job = create(:done, user: requestor)
+      create(:remark_done_requestor, job: done_job)
+      
+      expect{visit new_requestor_job_evaluation_path(done_job)}.to raise_error( ActionController::RoutingError)
+    end
+  end
+
 end

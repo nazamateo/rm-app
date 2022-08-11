@@ -122,4 +122,20 @@ RSpec.describe "View all traders", type: :system do
     end
   end
 
+  
+  context "when user is a requestor" do
+    it "cant update job orders" do
+      sign_in requestor
+      expect{visit admin_job_path(newly_created)}.to raise_error (ActionController::RoutingError)
+    end
+  end
+
+  
+  context "when user is a requestor" do
+    it "cant add remarks to job orders" do
+      sign_in requestor
+      expect{visit new_admin_job_remark_path(newly_created)}.to raise_error (ActionController::RoutingError)
+    end
+  end
+
 end
