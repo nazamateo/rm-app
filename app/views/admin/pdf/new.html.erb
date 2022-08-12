@@ -1,0 +1,47 @@
+<div class='grid grid-rows-7 h-5/6 w-4/12 text-xs'>
+  <div class="grid grid-rows-3 bg-blue-100 mx-2 ">
+    <div class='flex justify-center items-center w-full '>
+      <p>ENGINEERING UNIT JOB REQUEST FORM</p>
+    </div>
+    <div class='flex justify-start items-center'>
+      <p class='flex w-full ml-80 pl-2 h-4/6 items-center bg-gray-200'>JO number: <%=@job.id%></p>
+    </div>
+    <div class='grid grid-cols-2 '>
+      <div class='flex justify-between items-center'>
+        <p>DEPARTMENT: <span class='underline underline-offset-8'><%=@requestor.unit%></span></p>
+      </div>
+      <div class='flex justify-between items-center'>
+        <p>UNIT: <span class='underline underline-offset-8'><%=@requestor.service%></span></p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-red-200 border border-black mx-2 flex justify-between items-center">
+    <p>NATURE OF REQUEST: <span class='underline underline-offset-8'><%=@job.nature_of_request.capitalize%></span></p>
+  </div>
+  <div class="grid grid-cols-4 bg-blue-100 mx-2 ">
+    <div class='flex flex-col justify-center items-center border border-black'>
+      <p>DATE: </p>
+      <p class='underline underline-offset-8'><%=@job.created_at.localtime.strftime("%b %d, '%y")%></p>
+    </div>
+    <div class='flex justify-center items-center border border-black col-span-3'>
+      <p>REQUESTED BY: </p>
+      <p class='underline underline-offset-8'><%=@requestor.name%> <%=@requestor.surname%></p>
+    </div>
+  </div>
+  <div class="grid grid-cols-4 bg-red-100 mx-2">
+    <div class='flex flex-col justify-space-between items-center border border-black col-span-3'>
+      <div>
+        <p>RECOMMENDATIONS</p>
+      </div>
+      <div>
+        <p>EMERGENCY</p>
+        <p>BUDGET APPROVAL</p>
+        <p>RECOMMENDATIONS</p>
+      </div>
+    </div>
+    <div class='flex flex-col justify-center items-center border border-black'></div>
+  </div>
+  <div class="bg-blue-100">hi</div>
+  <div class="bg-red-200">hi</div>
+  <div class="bg-blue-100">hi</div>
+</div>

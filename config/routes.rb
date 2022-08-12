@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: %i[index]
     resources :jobs, only: %i[index show edit update] do
       resources :remarks, only: %i[new create]
+      resources :pdf, only: %i[new]
     end
 
   end
