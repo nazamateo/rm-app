@@ -103,6 +103,10 @@ GEM
       railties (>= 5.0.0)
     faker (2.22.0)
       i18n (>= 1.8.11, < 2)
+    faraday (2.5.2)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (3.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     htmlbeautifier (1.4.2)
@@ -247,6 +251,7 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.3.0)
       childprocess (>= 0.5, < 5.0)
@@ -334,6 +339,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
+  faraday
   htmlbeautifier
   mailjet
   net-imap
