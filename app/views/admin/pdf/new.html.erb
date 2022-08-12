@@ -156,9 +156,9 @@
     <div class='grid grid-cols-3 h-full'>
       <div class='border border-black border-b-0'>
         <div class='flex flex-col justify-center items-center h-full'>
-          <%if @job.staff_id != nil%>
+          <%if @job.assessor_id != nil%>
             <p class='underline underline-offset-8'>
-              <%=Personnel.all.find_by(id: @job.staff_id).surname%>
+              Engr. <%=Personnel.all.find_by(id: @job.assessor_id).surname%>
             </p>
           <%else%>
             <p class='underline underline-offset-8 text-transparent'>
@@ -181,7 +181,7 @@
           <p class='underline underline-offset-8 text-transparent'>
             blanck
           </p>
-          <p>BUDGE OFFICER </p>
+          <p>BUDGET OFFICER </p>
           <p>(print name and signature) </p>
           <table class='w-full'>
             <tr class='border border-gray-500'>
@@ -214,9 +214,9 @@
     <div class='grid grid-cols-3 h-full'>
       <div class='border border-black '>
         <div class='flex flex-col justify-center items-center h-full'>
-          <%if @job.assessor_id != nil%>
+          <%if @job.staff_id != nil%>
             <p class='underline underline-offset-8'>
-              <%=Personnel.all.find_by(id: @job.assessor_id).surname%>
+              <%=Personnel.all.find_by(id: @job.staff_id).name%> <%=Personnel.all.find_by(id: @job.staff_id).surname%>
             </p>
           <%else%>
             <p class='underline underline-offset-8 text-transparent'>
