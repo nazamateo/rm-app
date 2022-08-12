@@ -1,6 +1,4 @@
 class Admin::PdfController < ApplicationController
-    before_action :authenticate_user!
-    before_action :authenticate_admin
 
     def new
         @job = Job.all.find (params[:job_id])
