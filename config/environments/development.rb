@@ -45,7 +45,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   
-  config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025, domain: '127.0.0.1' }
+  # config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025, domain: '127.0.0.1' }
 
   config.action_mailer.default_url_options = { :host => 'dlshsi-engg-jo-app.herokuapp.com' }
 
