@@ -1,5 +1,5 @@
 <div class='grid grid-rows-15 h-5/6 w-4/12 text-xxs'>
-  <div class="grid grid-rows-3 bg-blue-100 row-span-1">
+  <div class="grid grid-rows-3row-span-1 border border-black">
     <div class='flex justify-center items-center w-full text-xs'>
       <p>ENGINEERING UNIT JOB REQUEST FORM</p>
     </div>
@@ -15,20 +15,20 @@
       </div>
     </div>
   </div>
-  <div class="bg-red-200 border border-black flex justify-between items-center row-span-1">
-    <p>NATURE OF REQUEST: <span class='underline underline-offset-8'><%=@job.nature_of_request.capitalize%></span></p>
+  <div class=" border border-black flex justify-between items-center row-span-1">
+    <p>NATURE OF REQUEST: <span class='underline underline-offset-4'><%=@job.nature_of_request.capitalize%></span></p>
   </div>
-  <div class="grid grid-cols-4 bg-blue-100 row-span-1">
+  <div class="grid grid-cols-4 row-span-1">
     <div class='flex flex-col justify-center items-center border border-black'>
       <p>DATE: </p>
-      <p class='underline underline-offset-8'><%=@job.created_at.localtime.strftime("%b %d, '%y")%></p>
+      <p class='underline underline-offset-4'><%=@job.created_at.localtime.strftime("%b %d, '%y")%></p>
     </div>
     <div class='flex justify-center items-center border border-black col-span-3'>
       <p>REQUESTED BY: </p>
-      <p class='underline underline-offset-8'><%=@requestor.name%> <%=@requestor.surname%></p>
+      <p class='underline underline-offset-4'><%=@requestor.name%> <%=@requestor.surname%></p>
     </div>
   </div>
-  <div class="grid grid-cols-6 bg-red-100">
+  <div class="grid grid-cols-6 ">
     <div class='flex flex-col justify-between border border-black col-span-4'>
       <div class='flex flex-row justify-start' >
         <p>RECOMMENDATIONS:</p>
@@ -44,18 +44,18 @@
       <p>ASST. ENGG HEAD/ENGG HEAD </p>
     </div>
   </div>
-  <div class="bg-blue-100 row-span-4 grid-rows-8">
-    <div class='border border-gray-600 text-xxs row-span-1 h-5'>
+  <div class="row-span-4 grid-rows-8">
+    <div class='border border-gray-600 text-xxs row-span-1 h-5 flex justify-center items-center bg-gray-200'>
       <p>M  A  T  E  R  I  A  L  S </p>
     </div>
     <div class='row-span-7 w-full h-full'>
       <table class='w-full h-full '>
         <tr class='border border-gray-500 h-1'>
-          <th class='border border-gray-500 '>Quantity</th>
-          <th class='border border-gray-500 '>Unit</th>
-          <th class='border border-gray-500 '>Item code</th>
-          <th class='border border-gray-500 '>Items</th>
-          <th class='border border-gray-500 '>Estimated cost</th>
+          <th class='border border-gray-500 w-10'>Quantity</th>
+          <th class='border border-gray-500 w-10'>Unit</th>
+          <th class='border border-gray-500 w-14'>Item code</th>
+          <th class='border border-gray-500 w-48'>Items</th>
+          <th class='border border-gray-500 w-20'>Estimated cost</th>
           <th class='border border-gray-500 '>Estimated cost of labor</th>
         </tr>
         <tr class='border border-gray-500'>
@@ -149,6 +149,112 @@
       </table>
     </div>
   </div>
-  <div class="bg-red-200 row-span-2">hi</div>
-  <div class="bg-blue-100 row-span-3">hi</div>
+  <div class=" row-span-2">
+    <div class='border border-gray-600 text-xxs row-span-1 h-5 flex justify-center items-center bg-gray-200 italic'>
+      <p>FOR REQUEST AMOUNTING TO PHP10,000 and above</p>
+    </div>
+    <div class='grid grid-cols-3 h-full'>
+      <div class='border border-black border-b-0'>
+        <div class='flex flex-col justify-center items-center h-full'>
+          <%if @job.staff_id != nil%>
+            <p class='underline underline-offset-8'>
+              <%=Personnel.all.find_by(id: @job.staff_id).surname%>
+            </p>
+          <%else%>
+            <p class='underline underline-offset-8 text-transparent'>
+              blanck
+            </p>
+          <%end%>
+          <p>REQUESTOR </p>
+          <p>(print name and signature) </p>
+          <table class='w-full'>
+            <tr class='border border-gray-500'>
+              <th class='border border-gray-500 w-10'>MM</th>
+              <th class='border border-gray-500 w-10'>DD</th>
+              <th class='border border-gray-500 w-14'>YY</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class='border border-black border-b-0'>
+        <div class='flex flex-col justify-center items-center h-full'>
+          <p class='underline underline-offset-8 text-transparent'>
+            blanck
+          </p>
+          <p>BUDGE OFFICER </p>
+          <p>(print name and signature) </p>
+          <table class='w-full'>
+            <tr class='border border-gray-500'>
+              <th class='border border-gray-500 w-10'>MM</th>
+              <th class='border border-gray-500 w-10'>DD</th>
+              <th class='border border-gray-500 w-14'>YY</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class='border border-black border-b-0'>
+        <div class='flex flex-col justify-center items-center h-full'>
+          <p class='underline underline-offset-8 text-transparent'>
+            blanck
+          </p>
+          <p>VICE CHANCELLOR </p>
+          <p>(print name and signature) </p>
+          <table class='w-full'>
+            <tr class='border border-gray-500'>
+              <th class='border border-gray-500 w-10'>MM</th>
+              <th class='border border-gray-500 w-10'>DD</th>
+              <th class='border border-gray-500 w-14'>YY</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-span-2">
+    <div class='grid grid-cols-3 h-full'>
+      <div class='border border-black '>
+        <div class='flex flex-col justify-center items-center h-full'>
+          <%if @job.assessor_id != nil%>
+            <p class='underline underline-offset-8'>
+              <%=Personnel.all.find_by(id: @job.assessor_id).surname%>
+            </p>
+          <%else%>
+            <p class='underline underline-offset-8 text-transparent'>
+              blanck
+            </p>
+          <%end%>
+          <p>ASSIGNED TO </p>
+          <p>(print name and signature) </p>
+          <table class='w-full'>
+            <tr class='border border-gray-500'>
+              <th class='border border-gray-500 w-10'>MM</th>
+              <th class='border border-gray-500 w-10'>DD</th>
+              <th class='border border-gray-500 w-14'>YY</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class='border border-black'>
+        <div class='flex flex-col justify-center items-center h-full'>
+          <p class='underline underline-offset-8 text-transparent'>
+            blanck
+          </p>
+          <p>ACKNOWLEDGED BY</p>
+          <p>(print name and signature) </p>
+          <table class='w-full'>
+            <tr class='border border-gray-500'>
+              <th class='border border-gray-500 w-10'>MM</th>
+              <th class='border border-gray-500 w-10'>DD</th>
+              <th class='border border-gray-500 w-14'>YY</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class='border border-black'>
+        <div class='flex flex-col justify-start items-start'>
+          <p>REMARKS: </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
