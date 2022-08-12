@@ -1,0 +1,64 @@
+<table class="w-full text-sm text-left text-gray-500 rounded-md dark:text-gray-400 rounded-md">
+  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th scope="col" class="py-3 px-6">
+        Job Order Number
+      </th>
+      <th scope="col" class="py-3 px-6">
+        Nature of request
+      </th>
+      <th scope="col" class="py-3 px-6">
+        Note to engineering
+      </th>
+      <th scope="col" class="py-3 px-6">
+        Status
+      </th>
+      <th scope="col" class="py-3 px-6">
+        Remarks
+      </th>
+      <th scope="col" class="py-3 px-6">
+        Created at
+      </th>
+      <th scope="col" class="py-3 px-6">
+        Closed at
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        <%=@job.id%>
+      </th>
+      <td class="py-4 px-6">
+        <%=@job.nature_of_request.capitalize%>
+      </td>
+      <td class="py-4 px-6">
+        <%=@job.note_to_staff.capitalize%>
+      </td>
+      <td class="py-4 px-6">
+        <% if @job.remark.last == nil %>
+          Queue
+        <%else%>
+          <%=@job.remark.last.status%>
+        <%end%>
+      </td>
+      <td class="py-4 px-6">
+        <% if @job.remark.last != nil %>
+          <%=@job.remark.last.remarks.capitalize%>
+        <%end%>
+      </td>
+      <td class="ps="py-4 px-6">
+        <%=@job.created_at.localtime.strftime("%b %d, '%y")%> | 
+        <%=@job.created_at.localtime.strftime('%H:%M')%>
+      </td>
+      <td class="py-4 px-6">
+        <% if @job.remark.last. != nil %>
+          <% if @job.remark.last.status == 'Done' || @job.remark.last.status == 'Cancelled'%>
+            <%=@job.remark.last.created_at.localtime.strftime("%b %d, '%y")%> |
+            <%=@job.remark.last.created_at.strftime('%H:%M')%>
+          <%end%>
+        <%end%>
+      </td>
+    </tr>
+  </tbody>
+</table>
