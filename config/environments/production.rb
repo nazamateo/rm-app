@@ -116,5 +116,17 @@ Rails.application.configure do
   # these configuration options.
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
-  # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session\
+
+  config.action_mailer.delivery_method = :mailjet
+  
+  config.action_mailer.raise_delivery_errors = true
+  
+  config.action_mailer.perform_deliveries = true
+
+  
+  # config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025, domain: '127.0.0.1' }
+
+  config.action_mailer.default_url_options = { :host => 'dlshsi-engg-jo-app.herokuapp.com' }
+
 end
