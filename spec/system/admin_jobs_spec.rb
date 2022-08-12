@@ -33,9 +33,7 @@ RSpec.describe "View all traders", type: :system do
       expect(page).to have_text(done.user.unit)
       expect(page).to have_text(newly_created.nature_of_request)
       expect(page).to have_text(engineer.surname)
-      expect(page).to have_text(remark_ongoing.status)
       expect(page).to have_text('Queue')
-      expect(page).to have_text(remark_cancelled.remarks)
       expect(page).to have_text(newly_created.created_at.localtime.strftime("%b %d, '%y"))
       expect(page).to have_link(href: admin_job_path(newly_created))
       
@@ -59,7 +57,6 @@ RSpec.describe "View all traders", type: :system do
       expect(page).to have_text(newly_created.note_to_staff)
       expect(page).to have_text('Queue')
       expect(page).to have_text(newly_created.created_at.localtime.strftime("%b %d, '%y"))
-      expect(page).to have_text('Add remarks')
       expect(page).to have_link(href: edit_admin_job_path(newly_created))
       expect(page).to have_link(href: new_admin_job_remark_path(newly_created))
     end
@@ -71,7 +68,7 @@ RSpec.describe "View all traders", type: :system do
       visit admin_jobs_path
 
       visit admin_job_path(newly_created)
-      click_on('Assessed by')
+      click_on('Assessed by:')
       expect(page).to have_text('Assessor')
       expect(page).to have_text('Assigned to')
 
@@ -95,7 +92,7 @@ RSpec.describe "View all traders", type: :system do
       visit admin_jobs_path
       
       visit admin_job_path(newly_created)
-      click_on('Add remarks')
+      click_on('Add Remarks')
       expect(current_path).to eql(new_admin_job_remark_path(newly_created))
       expect(page).to have_text('Status')
       expect(page).to have_text('Remarks')
@@ -119,7 +116,7 @@ RSpec.describe "View all traders", type: :system do
       visit admin_jobs_path
       
       visit admin_job_path(newly_created)
-      click_on('Add remarks')
+      click_on('Add Remarks')
       expect(current_path).to eql(new_admin_job_remark_path(newly_created))
       select('Done', from: 'remark_status')
       fill_in "remark[remarks]", with: 'done'
